@@ -1,0 +1,25 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net6.0-windows</TargetFramework>
+    <UseWPF>true</UseWPF>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="Fonts\Rajdhani-Bold.ttf" />
+    <None Remove="Fonts\Rajdhani-Light.ttf" />
+    <None Remove="Fonts\Rajdhani-Medium.ttf" />
+    <None Remove="Fonts\Rajdhani-Regular.ttf" />
+    <None Remove="Fonts\Rajdhani-SemiBold.ttf" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Fonts\Rajdhani-Bold.ttf" />
+    <Resource Include="Fonts\Rajdhani-Light.ttf" />
+    <Resource Include="Fonts\Rajdhani-Medium.ttf" />
+    <Resource Include="Fonts\Rajdhani-Regular.ttf" />
+    <Resource Include="Fonts\Rajdhani-SemiBold.ttf" />
+  </ItemGroup>
+
+</Project>

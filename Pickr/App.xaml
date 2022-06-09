@@ -1,0 +1,23 @@
+﻿<Application x:Class="Pickr.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:Pickr"
+             xmlns:vm="clr-namespace:Pickr.MVVM.ViewModel"
+             xmlns:view="clr-namespace:Pickr.MVVM.View"
+             StartupUri="./MVVM/View/MainWindow.xaml">
+    <Application.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="./Theme/ColorSlider.xaml" />
+                <ResourceDictionary Source="./Theme/ColorTextbox.xaml" />
+                <ResourceDictionary Source="./Theme/ColorLabel.xaml" />
+                <ResourceDictionary Source="./Theme/ColorButton.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+
+            <DataTemplate DataType="{x:Type vm:ColorPickerViewModel}">
+                <view:ColorPickerView />
+            </DataTemplate>
+
+        </ResourceDictionary>
+    </Application.Resources>
+</Application>
