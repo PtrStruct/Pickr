@@ -1,12 +1,17 @@
 ﻿using Pickr.Core;
 using Pickr.Helpers;
 using Pickr.MVVM.Model;
+using System.Drawing;
+using System.Drawing.Imaging;
+using System.IO;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
 
 namespace Pickr.MVVM.ViewModel
 {
-    internal class ColorPickerViewModel
+    internal class ColorPickerViewModel : ObservableObject
     {
 
         /* Commands */
@@ -22,7 +27,21 @@ namespace Pickr.MVVM.ViewModel
             set { _color = value; }
         }
 
+
+        private BitmapImage _previewBitmap;
+        public BitmapImage PreviewBitmap
+        {
+            get { return _previewBitmap; }
+            set
+            {
+                _previewBitmap = value;
+                OnPropertyChanged();
+            }
+        }
+
+
         private bool _isCapturing;
+        PixelGetter _pixelGetter = new PixelGetter();
 
         public ColorPickerViewModel()
         {
@@ -42,24 +61,40 @@ namespace Pickr.MVVM.ViewModel
                 {
                     while (_isCapturing)
                     {
-                        var pg = new PixelGetter();
-                        var color = pg.GetCursorPosAndColor();
+                        var capture = _pixelGetter.GetCursorPosAndColor();
+
+                        using var bitmap = new Bitmap(20, 20);
+                        using (var g = Graphics.FromImage(bitmap))
+                            g.CopyFromScreen(capture.X - 10, capture.Y - 10, 0, 0, bitmap.Size, CopyPixelOperation.SourceCopy);
 
                         Application.Current.Dispatcher.Invoke(() =>
                         {
-                            ColorModel.Red = color.R;
-                            ColorModel.Green = color.G;
-                            ColorModel.Blue = color.B;
-
+                            ColorModel.Red = capture.Color.R;
+                            ColorModel.Green = capture.Color.G;
+                            ColorModel.Blue = capture.Color.B;
+                            PreviewBitmap = Convert(bitmap);
                         });
-                        await Task.Delay(16);
 
+                        await Task.Delay(16);
                     }
+
                 });
 
             }, o => true);
 
             StopCurrentColorPosCommand = new RelayCommand(o => { _isCapturing = false; }, o => true);
+        }
+
+        public BitmapImage Convert(Bitmap src)
+        {
+            MemoryStream ms = new MemoryStream();
+            ((System.Drawing.Bitmap)src).Save(ms, System.Drawing.Imaging.ImageFormat.Bmp);
+            BitmapImage image = new BitmapImage();
+            image.BeginInit();
+            ms.Seek(0, SeekOrigin.Begin);
+            image.StreamSource = ms;
+            image.EndInit();
+            return image;
         }
     }
 }

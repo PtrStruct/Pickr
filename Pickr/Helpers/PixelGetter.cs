@@ -3,6 +3,7 @@ using System;
 using System.Diagnostics;
 using System.Drawing;
 using System.Runtime.InteropServices;
+using System.Threading.Tasks;
 using System.Windows.Input;
 
 namespace Pickr.Helpers
@@ -23,7 +24,7 @@ namespace Pickr.Helpers
         [return: MarshalAs(UnmanagedType.Bool)]
         static extern bool GetCursorPos(out POINT lpPoint);
 
-        public Color GetCursorPosAndColor()
+        public CaptureModel GetCursorPosAndColor()
         {
             GetCursorPos(out POINT p);
             var hdc = GetDC(IntPtr.Zero);
@@ -34,11 +35,26 @@ namespace Pickr.Helpers
             ReleaseDC(IntPtr.Zero, hdc);
 
 
+            var captureModel = new CaptureModel
+            {
+                Color = color,
+                X = p.x,
+                Y = p.y,
+            };
+
             Debug.WriteLine($"X: {p.x}  - Y: {p.y}");
             Debug.WriteLine($"X: {p.x}  - Y: {p.y}");
             Debug.WriteLine($"Color: R: {color.R} G: {color.G} B: {color.B} - A: {color.A}");
 
-            return color;
+            return captureModel;
         }
     }
+
+    class CaptureModel
+    {
+        public Color Color { get; set; }
+        public int X { get; set; }
+        public int Y { get; set; }
+    }
+
 }

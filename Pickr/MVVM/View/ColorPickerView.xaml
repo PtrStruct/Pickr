@@ -9,12 +9,21 @@
              Width="500"
              Background="{Binding ColorModel.ColorStop}">
     <Grid>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition />
+            <ColumnDefinition Width="100" />
+        </Grid.ColumnDefinitions>
+        
         <Grid.InputBindings>
-            <KeyBinding  Key="S"
+            <KeyBinding  Key="C"
+                         Modifiers="Ctrl"
                          Command="{Binding StopCurrentColorPosCommand}" />
         </Grid.InputBindings>
         <StackPanel Width="300"
-                    VerticalAlignment="Center">
+                    VerticalAlignment="Center"
+                    Grid.Column="0"
+                    Margin="100,0,0,0">
 
             <Label Content="Pickr"
                    HorizontalAlignment="Center"
@@ -80,11 +89,27 @@
                 </Button.InputBindings>
             </Button>
 
-            
+
         </StackPanel>
 
-        <Rectangle Width="50"
-                   Height="50" />
+        <Border BorderThickness="2"
+                BorderBrush="Black"
+                Width="50"
+                Height="50"
+                HorizontalAlignment="Center"
+                Grid.Column="1">
+            <Grid>
+                <Rectangle Width="5"
+                           Height="5"
+                           Fill="Black"
+                           Panel.ZIndex="100"/>
+
+                <Image Source="{Binding PreviewBitmap}"
+                       Stretch="UniformToFill"
+                       Panel.ZIndex="-100"/>
+            </Grid>
+
+        </Border>
 
     </Grid>
 </UserControl>

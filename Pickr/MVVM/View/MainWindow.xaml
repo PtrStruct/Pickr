@@ -17,7 +17,6 @@
             <MouseBinding Gesture="LeftClick"
                           Command="{Binding DragMove}" />
 
-
         </Grid.InputBindings>
         <ContentPresenter Content="{Binding CurrentView}"/>
     </Grid>
