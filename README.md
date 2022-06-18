@@ -1,5 +1,5 @@
 <p align="center">
- <img src="https://i.imgur.com/6UqTTEM.png" alt="Pickr"></a>
+ <img src="https://i.imgur.com/VCvUsRb.png" alt="Pickr"></a>
 </p>
 
 <h3 align="center">Pickr - A Simple Colorpicker For Windows</h3>
