@@ -15,7 +15,6 @@ namespace Pickr.MVVM.ViewModel
     {
 
         /* Commands */
-
         public RelayCommand GetCurrentPosCommand { get; set; }
         public RelayCommand StopCurrentColorPosCommand { get; set; }
 
@@ -91,7 +90,7 @@ namespace Pickr.MVVM.ViewModel
         public BitmapImage Convert(Bitmap src)
         {
             MemoryStream ms = new MemoryStream();
-            ((System.Drawing.Bitmap)src).Save(ms, System.Drawing.Imaging.ImageFormat.Bmp);
+            (src).Save(ms, ImageFormat.Bmp);
             BitmapImage image = new BitmapImage();
             image.BeginInit();
             ms.Seek(0, SeekOrigin.Begin);
