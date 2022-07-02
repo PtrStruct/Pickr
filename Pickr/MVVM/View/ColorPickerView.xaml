@@ -70,11 +70,13 @@
                          Style="{StaticResource ColorTextbox}"
                          Text="{Binding ColorModel.Blue}" />
             </StackPanel>
+
             <TextBox Width="60"
                      Height="20"
                      Margin="0,8,0,0"
                      Style="{StaticResource ColorTextbox}"
-                     Text="{Binding ColorModel.ColorHex}" />
+                     Text="{Binding ColorModel.ColorHex}">
+            </TextBox>
 
             <Button Content="Free Mode"
                     FontSize="14"

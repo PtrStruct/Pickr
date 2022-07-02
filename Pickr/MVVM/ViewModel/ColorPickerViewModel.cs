@@ -18,6 +18,7 @@ namespace Pickr.MVVM.ViewModel
 
         public RelayCommand GetCurrentPosCommand { get; set; }
         public RelayCommand StopCurrentColorPosCommand { get; set; }
+        public RelayCommand CopyHexCommand { get; set; }
 
 
         private ColorModel _color;
@@ -82,7 +83,11 @@ namespace Pickr.MVVM.ViewModel
 
             }, o => true);
 
-            StopCurrentColorPosCommand = new RelayCommand(o => { _isCapturing = false; }, o => true);
+            StopCurrentColorPosCommand = new RelayCommand(o =>
+            {
+                _isCapturing = false;
+                Clipboard.SetText(ColorModel.ColorHex);
+            }, o => true);
         }
 
         public BitmapImage Convert(Bitmap src)
