@@ -18,8 +18,6 @@ namespace Pickr.MVVM.ViewModel
 
         public RelayCommand GetCurrentPosCommand { get; set; }
         public RelayCommand StopCurrentColorPosCommand { get; set; }
-        public RelayCommand CopyHexCommand { get; set; }
-
 
         private ColorModel _color;
         public ColorModel ColorModel
